@@ -7,7 +7,6 @@ sudo virt-install --virt-type kvm --name win11 --ram 8192 \
   --vcpu 32 \
   --cpu host-passthrough \
   --network network=default,model.type=virtio \
-  --graphics spice,listen=0.0.0.0,port=5911,password=2002 \
   --noautoconsole \
   --os-variant=win11 \
   --sound default \
