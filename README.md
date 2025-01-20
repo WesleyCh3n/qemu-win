@@ -84,6 +84,26 @@ sc config "SysMain" start= disabled
     - Search `Adjust the appearance and performance`
     - Choose `Adjust for best performance` > `Apply`
 
+## Port Forwarding
+
+Add `xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'` on domain tag
+```html
+<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+    ...
+</domain>
+```
+
+Add below tags as last element in `domain`
+```html
+<qemu:commandline>
+  <qemu:arg value='-netdev'/>
+  <qemu:arg value='user,id=net0,hostfwd=tcp::2222-:22'/> <!-- port config -->
+  <!-- add following if you remove interface>network -->
+  <qemu:arg value='-device'/>
+  <qemu:arg value='rtl8139,netdev=net0'/>
+</qemu:commandline>
+```
+
 ## Reference
 - https://sysguides.com/install-a-windows-11-virtual-machine-on-kvm
 - https://manuelcortez.net/2023/12/creating-vm-windows11-libvirt/
